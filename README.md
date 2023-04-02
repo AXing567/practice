@@ -1,2 +1,2 @@
 # CodeAll
-A prictace project.
+A practice project.
