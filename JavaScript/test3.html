@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var count = 0;
+
+        function myFunction() {
+            count++;
+            if (count === 1) {
+                document.write("这是第一次调用");
+                document.write("<br>");
+                document.write("这是用记事本写的js程序");
+                document.write("<br>");
+
+            } else if (count === 2) {
+                document.write("这是第二次调用");
+                document.write("<br>");
+                document.write("这是用记事本写的js程序");
+                document.write("<br>");
+
+            } else if (count === 3) {
+                document.write("这是第三次调用");
+                document.write("<br>");
+                document.write("这是用记事本写的js程序");
+                document.write("<br>");
+
+                count = 0; // 重置计数器
+            }
+        }
+    </script>
+</head>
+
+<body>
+    <script>
+        myFunction();
+        myFunction();
+        myFunction();
+    </script>
+</body>
+
+</html>

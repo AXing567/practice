@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resume</title>
+    <style>
+        /* 全局 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .website {
+            color: salmon;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        /* 头部 */
+        header {
+            width: 100%;
+            height: 200px;
+            background: lightgoldenrodyellow;
+        }
+
+        img {
+            width: 300px;
+            height: 200px;
+            margin-left: 30px;
+            float: left;
+        }
+
+        nav {
+            float: left;
+            margin-left: 30px;
+            color: salmon;
+        }
+
+        nav>h1 {
+            margin-top: 10px;
+            font-size: 36px;
+            font-weight: 200;
+        }
+
+        nav>h2,
+        h4 {
+            margin-top: 15px;
+        }
+
+        /* 正文 */
+        section {
+            width: 100%;
+            height: 800px;
+            background: #eae6e666;
+            position: relative;
+        }
+
+        /* 侧边 */
+        .sideBar {
+            width: 300px;
+            height: 100%;
+            background: #9adab599;
+            margin-left: 30px;
+        }
+
+        .sideBar>.personalInfo,
+        .awards {
+            padding-left: 20px;
+        }
+
+        .sideBar>.selfEva {
+            padding: 0 5px;
+        }
+
+        .sideBar>div>h3 {
+            color: brown;
+            font-weight: 500;
+            margin: 15px;
+        }
+
+        .personalInfo {
+            padding: 5px;
+        }
+
+        .personalInfo>ul>li {
+            margin-top: 8px;
+        }
+
+        .awards>ul>li {
+            margin-top: 8px;
+        }
+
+        /*主要内容*/
+        .content {
+            position: absolute;
+            top: 0;
+            left: 330px;
+        }
+
+        .content>div {
+            margin-top: 15px;
+            margin-left: 15px;
+        }
+
+        .content>div>h3 {
+            margin-top: 20px;
+            margin-bottom: 15px;
+            color: brown;
+            font-weight: 500;
+        }
+
+        .education>div {
+            margin-bottom: 10px;
+        }
+
+        .education .para {
+            font-size: 18px;
+            font-family: monospace;
+        }
+
+        .education .para>i,
+        span {
+            font-size: 12px;
+            margin-left: 10px;
+        }
+
+        .jobExp>div>p,
+        ol {
+            margin-bottom: 10px;
+            font-size: 20px;
+            font-family: monospace;
+        }
+
+        .jobExp>div>ol {
+            margin-left: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Header -->
+    <header>
+        <img src="https://img1.baidu.com/it/u=1638990305,2551156309&fm=253&fmt=auto&app=138&f=JPEG?w=706&h=500">
+        <nav>
+            <h1>关新星</h1>
+            <h2>个人简历</h2>
+            <h4><strong>求职意向:</strong> 程序员</h4>
+        </nav>
+    </header>
+
+    <!-- Content -->
+    <section>
+        <!-- SideBar -->
+        <div class="sideBar">
+            <div class="personalInfo">
+                <h3>个人信息</h3>
+                <ul>
+                    <li>民族： 满族</li>
+                    <li>政治面貌： 团员</li>
+                    <li>籍贯： 黑龙江省哈尔滨市</li>
+                    <li>电话： 18348592611</li>
+                    <li>邮箱： 482915138@qq.com</li>
+                </ul>
+            </div>
+            <div class="selfEva">
+                <h3>个人介绍</h3>
+                <p>
+                    我是一个沉稳且开朗的人，态度积极，可塑性强，引用雷锋的一句话“我是一块砖，哪里需要哪里搬！”平日喜静，乐养生，对自我提升和实现自我、满足物质基础有着较高要求
+                </p>
+            </div>
+            <div class="awards">
+                <h3>在校经历</h3>
+                <ul>
+                    <li>2022-05 大创省级负责人</li>
+                    <li>2022-05 互联网+校级负责人</li>
+                    <li>2022-12 程序设计竞赛校级第一</li>
+                    <li>2021-09 爱我国防主题演讲比赛校级二等奖 </li>
+                </ul>
+            </div>
+            <div class="skill"></div>
+        </div>
+        <!-- MainContents -->
+        <div class="content">
+            <div class="education">
+                <h3>教育背景</h3>
+                <div>
+                    <p class="para">齐齐哈尔大学 <span>2021-09至2025-06</span></p>
+                </div>
+                <div>
+                    <!-- <p class="para">xxxxxxx.本科<i>211</i><span>2012-09至2016-06</span></p> -->
+                    <p class="para">计算机科学与技术专业（高职本）</p>
+                    <!-- <p class="para subject">xxxx、xxxx、xxxx、xxxx、xxxx</p> -->
+                    <p class="subjects"></p>
+                </div>
+            </div>
+            <div class="jobExp">
+                <h3>技能证书</h3>
+                <div>
+                    <ol>
+                        <li> C1驾驶证</li>
+                    </ol>
+                </div>
+                <h3><a href = "https://blog.csdn.net/ax_CSDN?spm=1000.2115.3001.5343" target="_blank">个人CSDN</a> </h3>
+                <h3><a href = "https://codeforces.com/profile/AX666" target = "_blank"> 个人CodeForce</a></h3>
+                
+
+
+                <!-- <h3>项目经历</h3>
+                <div>
+                    <p>独立完成帮帮网站的搭建和维护</p>
+                    <ol>
+                        <li>购买阿里云CentOS服务器</li>
+                        <li>安装LAMP，配置开发环境，DNS</li>
+                        <li>编写PHP后台代码，JS/HTML/CSS前端，操作MySQL</li>
+                        <li>独立上线部署，并维护系统</li>
+                    </ol>
+                    <p>使用技术点：<br>
+                        CentOS,VI,PHP,Apache,MySQL,HTML/JS/CSS
+                        <br>
+                    </p>
+                </div> -->
+            </div>
+            <div class="skill">
+                <h3>专业技能</h3>
+                <div>
+                    <p>C++</p>
+                    <progress value="50" max="100"></progress>
+                    <p>Java</p>
+                    <progress value="50" max="100"></progress>
+                    <p>数据结构与算法</p>
+                    <progress value="60" max="100"></progress>
+                    <p>态度</p>
+                    <progress value="100" max="100"></progress>
+                </div>
+            </div>
+        </div>
+        <div id="wrapper">
+            <img src="images/balloon.png" id="balloon1" style="top: 12.7441px; left: 784.454px; ">
+            <img src="images/balloon2.png" id="balloon2" style="top: 235.093px; left: 306.266px; ">
+            <img src="images/balloon.png" id="balloon3" style="top: 359.42px; left: 265.835px; ">
+            <img src="images/balloon2.png" id="balloon4" style="top: 259.495px; left: 779.553px; ">			
+        </div>
+        
+        
+        <!--IE6实现PNG图片透明JS代码-->
+        <script type="text/javascript" src="js/png.js"></script>
+
+    </section>
+</body>
+
+</html>

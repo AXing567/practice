@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    请输入字母：
+    <form>
+        <input type="text" name="letter" id="letter">
+        <input type="button" value="提交" onclick="check()">
+    </form>
+    <script>
+        function check(){
+            // 如果输入的不是t，那么弹出输入错误
+            if(document.getElementById("letter").value != "t"){
+                alert("输入错误");
+            }
+        }
+    </script>
+</body>
+</html>

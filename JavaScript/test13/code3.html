@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 鼠标在页面上移动时能在相应位置“捕捉鼠标位置”处显示鼠标当前位置的数值 -->
+    <p>捕捉鼠标位置</p>
+    <p id="position"></p>
+    <!-- 通过选择单选按钮【12小时制】或【24小时制】，可以在文本框中动态显示当前时间，小时、分、秒数都以两位数字表示 -->
+    <p>显示当前时间</p>
+    <input type="text" id="time" value=""> <br>
+    <font size="4">时间制式：</font>
+    <input type="radio" name="radio" id="hour12" value="12">12小时制
+    <input type="radio" name="radio" id="hour24" value="24">24小时制
+    <script>
+        var position = document.getElementById('position');
+        document.onmousemove = function(e){
+            var x = e.clientX;
+            var y = e.clientY;
+            position.innerHTML = '鼠标当前位置：' + x + ',' + y;
+        }
+        var time = document.getElementById('time');
+        var hour = new Date().getHours();
+        var minute = new Date().getMinutes();
+        var second = new Date().getSeconds();
+        time.value = hour + ':' + minute + ':' + second;
+        var hour12 = document.getElementById('hour12');
+        var hour24 = document.getElementById('hour24');
+        hour12.onclick = function(){
+            var hour = new Date().getHours();
+            var minute = new Date().getMinutes();
+            var second = new Date().getSeconds();
+            if(hour > 12){
+                hour = hour - 12;
+            }
+            time.value = hour + ':' + minute + ':' + second;
+        }
+        hour24.onclick = function(){
+            var hour = new Date().getHours();
+            var minute = new Date().getMinutes();
+            var second = new Date().getSeconds();
+            time.value = hour + ':' + minute + ':' + second;
+        }
+
+    </script>
+</body>
+</html>

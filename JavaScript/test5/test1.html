@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        var x = "这是一个字符串"; //声明变量
+        var y = 76; var z = 6; var r; var c = "abc123";
+        var a = "321abc"; var b = "3.21abc";
+        document.write("变量x的初始值为：" + x + "<br/>");
+        document.write("变量y的初始值为：" + y + "<br/>");
+        document.write("变量z的初始值为：" + z + "<br/>");
+        document.write("变量r的初始值为：" + r + "<br/>");
+        x = y; 	//改变变量的值
+        document.write("<br/>");
+        document.write("y变量赋值给x变量后，x的值为：" + x + "<br/>");
+        document.write("y变量赋值给x变量后，y的值为：" + y + "<br/>");
+        r = x % z; 	//计算表达式
+        document.write("<br/>");
+        document.write("计算表达式x%z的值为：" + r + "<br/>");
+        r = x / z + x - 2 / 3
+        document.write("计算表达式x/z+x-2/3的值为：" + r + "<br/>");
+        document.write("<br/>");
+        document.write("数据类型的隐式转换：<br/>");   	//数据类型隐式转换
+        y = "y变为一个字符串";
+        document.write("变量y被重新赋值后值为：" + y + "<br/>");
+        document.write("<br/>");
+        document.write("数据类型的显式转换：<br/>");    	//数据类型显示转换
+        document.write("利用parseInt( )将字符串变量a转换为数值变量" + parseInt(a) + "<br/>");
+        document.write("利用parseFloat( )将字符串变量b转换为数值变量" + parseFloat(b) + "<br/>");
+        document.write("利用parseInt( )将字符串变量c转换为数值变量" + parseInt(c) + "<br/>");
+
+
+
+    </script>
+</body>
+
+</html>

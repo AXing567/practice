@@ -1,0 +1,201 @@
+<html>
+	<head>
+		<title>综合练习</title>
+		<script language="javascript">
+
+function compare(a,b) {
+    if (a[7]>b[7]) return 1;
+    if (a[7]<b[7]) return -1;
+    return 0;
+  }
+
+
+/*学生对象构造函数*/
+function Student(no,name,english,mathe_m,c,js,data_s)
+{
+    this.no=no;
+	this.name=name;
+	this.english=parseInt(english);
+	this.mathe_m=parseInt(mathe_m);
+	this.c=parseInt(c);
+	this.js=parseInt(js);
+	this.data_s=parseInt(data_s);
+ 	this.getNO=function()                //返回学生学号
+	{ 
+		return this.no;
+	}
+	this.summation=function()            //计算总分
+	{
+	     return this.english+this.mathe_m+this.c+this.js+this.data_s;
+	}
+}
+
+var students=new Array();
+var count=0;
+
+/*判断成绩是否符合要求*/
+function check_num(num)
+{
+   if(isNaN(num))
+   {
+       alert("输入的不是数字，请重新输入");
+	   return false;
+   }
+   else if(num>100||num<0)
+   {
+       alert("输入成绩不合法，请重新输入");
+	   return false;
+   }
+   else 
+   {
+        return true;
+   }
+}
+
+/*判断输入信息是否符合要求*/
+function check()
+{
+    var flag=true;
+	for(var i=0;i<7;i++)
+	{
+	    if(form1.elements[i].value.length==0){
+		    alert("输入内容不能为空！");
+			flag=false;
+			break;
+		}
+		if(i>1)
+		{
+		    flag=check_num(form1.elements[i].value); 
+			if(!flag) break;
+		}
+		else
+		{		    
+			if(form1.elements[i].value.length < 10){
+				if(i==0){
+					alert("学号长度不够，请重新输入");
+					flag = false;
+					break;
+				}
+			}
+		}
+	}
+	return flag;
+}
+
+
+/*显示输入信息*/
+function show()
+{
+    if(check())
+	{
+	    for(var i=0;i<7;i++)
+	    {
+		   with(form1.elements[i])
+		   {
+		       if(i<=1)
+		           form1.textarea.value+=""+id+"："+value;
+		       else
+		           form1.textarea.value+="\r\n"+id+"："+value;
+	       }   
+		}
+		form1.textarea.value=form1.textarea.value+"\r\n\r\n";
+		with(form1)
+		{
+		   var stu=new Student(elements[0].value,elements[1].value,elements[2].value,elements[3].value,elements[4].value,elements[5].value,elements[6].value);
+		   students[count]=stu;
+		   count++;
+		}
+	}
+}
+
+/*显示总分*/
+function SumShow()
+{
+    var total=new Array();
+	form1.textarea2.value="学号       "+"总分\r\n";
+	for(n in students)
+	{
+		total[n]=students[n].summation();
+		students[n][7]=total[n];//新增一列存总分		
+	}
+	students.sort(compare);//按总分排序
+	for(n in students)
+	{
+		form1.textarea2.value+=students[n].getNO()+"    "+students[n][7]+"\r\n";
+		// form1.textarea2.value+=students[n].getNO()+"    "+total[n]+"\r\n";
+	}
+}
+</script>
+		<style type="text/css">
+<!--
+body {
+	font-family: "宋体";
+	font-size: 12px;
+}
+td {
+	font-family: "宋体";
+	font-size: 12px;
+}
+-->
+</style>
+	</head>
+	<body>
+		<form name="form1" method="post" action="">
+			<label>学号：
+				<input id="学号" name="xhfield" type="text" size="15">
+			</label>
+
+			<label>姓名：
+				<input id="姓名" name="namefield" type="text" size="16">
+			</label>
+
+			<p>
+				<label>英语：
+					<input id="英语" name="efield" type="text" size="5">
+				</label>
+
+				<label>高数：
+					<input id="高数" name="mfield" type="text" size="5">
+				</label>
+
+				<label>C语言：
+					<input id="C语言" name="cfield" type="text" size="5">
+				</label>
+
+
+				<label>动态脚本：
+					<input id="动态脚本" name="jfield" type="text" size="5">
+				</label>
+
+				<label>数据结构：
+					<input id="数据结构" name="dfield" type="text" size="5">
+				</label>
+			</p>
+			<p>
+				<label>
+					<input type="button" name="Submit" value="添加学生成绩" onClick="show()">
+				</label>
+				<label>
+					<input type="reset" name="Submit2" value="重置">
+				</label>
+				<label>
+					<input type="button" name="Submit3" value="显示总分" onClick="SumShow()">
+				</label>
+			</p>
+			<table width="530" border="0" cellspacing="0" cellpadding="0">
+				<tr>
+					<td height="30">成绩表：</td>
+					<td>&nbsp;</td>
+					<td>总分排序： </td>
+				</tr>
+				<tr>
+					<td><textarea name="textarea" cols="35" rows="15"></textarea></td>
+					<td width="60">&nbsp;</td>
+					<td><textarea name="textarea2" cols="25" rows="15"></textarea></td>
+				</tr>
+			</table>
+		</form>
+
+		<p>&nbsp;</p>
+	</body>
+</html>

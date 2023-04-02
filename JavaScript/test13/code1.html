@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <a href="javascript:openNews()">打开新窗口</a> <br>
+    <a href="javascript:closeNews()">关闭新窗口</a> <br>
+    <a href="javascript:closeCurrent()">关闭当前窗口</a> <br>
+    <script>
+        var webWindow;
+        function openNews(){
+            webWindow = window.open('http://www.baidu.com','_blank','width=400,height=400');
+        }
+        function closeNews(){
+            webWindow.close();
+        }
+        function closeCurrent(){
+            // 弹出对话框，是否关闭窗口
+            if(confirm('是否关闭当前窗口？'))
+                window.close();
+        }
+    </script>
+</body>
+</html>

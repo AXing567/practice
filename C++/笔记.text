@@ -1,0 +1,283 @@
+知识点：
+    记忆化搜素
+    递归
+    前缀和
+    容斥原理
+    二分
+    模拟
+    动态规划dp：01背包、分组背包、完全背包、多重背包、混合背包
+    打表
+    线性筛         
+    
+    
+    二分搜索————查找边界
+        查找第一个大于等于x的元素的库函数：std::lower_bound()
+        查找最后一个小于x的元素的库函数：std::lower_bound()-1
+        查找第一个大于x的元素的库函数：std::upper_bound()
+        查找最后一个小于等于x的元素的库函数：std::upper_bound()-1
+
+
+
+    小技巧：    int较大值： 0x7fffffff//七个f
+
+    
+    
+
+
+    数论
+        (a+b)%c=(a%c+b%c)%c
+        辗转相除求最大公约数   
+        LCM(a,b) = (a * b) / GCD(a , b); 
+        gcd(a,b)==1 称为a,b互素
+        向下取整符号：⌊x/10⌋   x/10后向下取整
+        向下取整公式：(x-9)/10
+        向上取整公式：a/b=(a+b-1)/10
+        
+
+    
+    回溯爆搜
+        时间复杂度2^n或n!，当n<=20时此算法可用
+
+Standard Template Library  
+
+    栈
+        栈的头文件：<stack>
+        栈的使用：
+        初始化      std::stack<数据类型>栈名
+        压栈        栈名.push()
+        出栈        栈名.pop()
+        判空        栈名.empty()    //“空”返回1，“非空”返回0
+        查看栈顶    栈名.top()    
+        
+        
+    vector容器
+        需引入头文件<vector>
+
+        定义方法：vector<数据类型> name;                        延展——带初始长度的容器定义方法vector<数据类型> name(容器初始长度);  
+        新增元素name.push_back(数据类型对应的值);
+        删除元素name.pop_back();//为空时再次删除会报错
+        长度name.size();
+        清空所有数据且释放内存vector<数据类型>().swap(name);
+        整体赋值name1=name2;
+        动态数组开始下标name.begin();
+        动态数组末尾下标name.end();
+        排序sort(name.begin(),name.end());
+        数据类型为自定义结构体
+            struct Stu{
+                bool gcd;
+                int score;
+            }
+            int main(){
+                vector<Stu>vec;
+                Stu a;
+                a.gcd = true ;
+                a.score = 100 ;
+                vec.push_back (a);
+                vec.push_back ({false, 80});
+            }
+        指定数组大小和默认值vector<数据类型>name(数据长度, 默认值);
+        vector 的传递 ：例1形参 ： vector<数据类型> &形参名 
+                           实参 ： name
+                        例2形参 ： vector<数据类型> *形参名
+                           实参 ： &name
+
+
+    set容器
+        原理：红黑树
+        特点：有序、时间复杂度为对数级
+        用处：去重、排序......
+        需引入头文件<set>
+
+        定义方法：set<数据类型> name;
+        插入x：         name.insert(x);
+        删除x：         name.erase(x);
+        元素数量：      name.size();
+        //查找是否有：    name.find(x);//用find
+        统计元素x的数量 name.count(x);//相比较于find，由于set中的去重性，可根据返回的0或1来判断是否有元素x，而find使用相对复杂
+        容器是否为空：  name.empty();
+        容器的起始下标：name.begin();
+        容器的终止下标：name.end();
+        以迭代器的方式遍历内部内容：
+            for (auto it - name.begin() ; it != name.end() ; it ++)
+                cout << *it << " " ;
+    
+
+
+    unordered_set无序哈希set集合
+        c++11中，功能同set
+        原理：哈希表
+        特点：无序、时间复杂度为常数级
+        用处：去重、快速查找......
+        头文件：<unordered_set>
+        通解：适用于只有key，没有伴随数据value，
+        
+        定义方法：unordered_set<数据类型> name;
+        插入x：         name.insert(x);
+        删除x：         name.erase(x);
+        元素数量：      name.size();
+        //查找是否有：    name.find(x);//用find
+        统计元素x的数量 name.count(x);//相比较于find，由于set中的去重性，可根据返回的0或1来判断是否有元素x，而find使用相对复杂
+        容器是否为空：  name.empty();
+        容器的起始下标：name.begin();
+        容器的终止下标：name.end();
+        以迭代器的方式遍历内部内容：
+            for (auto it = name.begin() ; it != name.end() ; it ++)
+                cout << *it << " " ;
+        
+    unordered_map无序map集合
+        头文件：<unordered_map>
+        通解：
+            适用于有key，有伴随数据value
+            放入哈希表的东西如果是基础数据类型，那么按照值传递
+            如果是复杂数据类型，那么按照引用传递
+            带来的不同是占用空间不一样
+        定义：  unordered_map<数据类型 , 数据类型 > name;
+        增：    name.emplace(key , value);
+        删：    name.erase(key);
+        查：    cout << nmae[key] << endl;
+        for (auto it = name.begin() ; it != name.end() ; it++)
+            cout << it->first << ',' << it->second << endl;
+
+    unordered_multimap无序可重复key值map容器
+        头文件：<unordered_map>
+        定义和增删改查几乎同上,但不能cout << name[key] << endl;
+        
+        
+
+    map有序map
+        利用红黑树实现对数级时间复杂度
+        可用于去重、排序(重复的会覆盖掉)
+        头文件<map>
+
+
+        简而言之：
+            定义：  map <data_type , data_type> name;
+            增：    name[key] = value;
+            删：    name.earse[key];
+            改：    name[key] = value;//会覆盖掉原来的value值
+            查：    name[key] = value;
+
+        定义方法：      map<数据类型1 , 数据类型2> name;//其中数据类型1为key关键字位置，数据类型2为value值位置
+        赋值方法1-3：   name[first value] = second value;//简便
+                      //name.insert(pair<数据类型1 , 数据类型2>(first value , second value));
+                      //name.insert(map<数据类型1 , 数据类型2>::value_type(first value , second value));
+        读取方法1-3：   for (auto it : name)//c++11以后支持的方法(简便)
+                            cout << it.first << ':' << it.second << endl;
+                      //map<数据类型1 , 数据类型2>::iterator it;
+                      //for (it = name.begin() ; it != name.end() ; it++)
+                      //    cout << it -> first << ':' << it -> second << endl;
+
+                      //for (auto it = name.begin() ; it != name.end() ; it ++)
+                      //    cout << it -> first << ':' << it -> second << endl;
+        判断数据是否插入成功
+            auto 变量名 = name.insert(map<数据类型1, 数据类型2>::value_type(数据值1 , 数据值2));
+            cout << 变量名.second << endl;//0是插入失败，1是成功
+        通过key找value
+            cout << name.find(key值) -> second << endl;//如果find没有找到key值，值为m.end();
+        删除元素
+            name.erase(key值);
+        //map常用函数http://c.biancheng.net/view/7173.html（ctrl+鼠标左键 = 打开网址）
+        
+
+
+
+    数组的传递：
+        一维：形参：数据类型 形参名[] , int len //无法通过传递过来的形参获得数组长度，所以需要传递过来长度
+              实参：数组名 , sizeof(数组名)/sizeof(数组名[0])
+              形参：数据类型 *形参名
+              实参：数组名
+              
+        二维：形参：数据类型 形参名[][列长] , int len1 , int len2
+              实参：数组名 , sizeof(数组名)/sizeof(数组名[0][0])/sizeof(数组名[0]) , sizeof(数组名[0])/sizeof(数组名[0][0]) //行长度、列长度
+
+
+
+    sort排序函数
+        头文件<algorithm>
+        默认从小到大排序
+        bool cmp(数据类型 a , 数据类型 b)
+        {
+            return a > b;//使sort从大到小排序 即 降序
+        }
+        sort(name + 1 , name + n + 1 , cmp);
+        //cmp函数可以创建多个排序条件，例如
+            const int N = 1e5 + 10;
+            typedef pair<pair<int, int>, int> PII;
+            PII num[N];
+
+            bool cmp(PII a, PII b)
+            {
+                if(a.second == b.second)//当他们相等的时候按照如下规则排序
+                    return a.first.first > b.first.first;
+                return a.second > b.second;//不符合上面的条件，按照此条规则排序
+            }
+        排序的简略写法，
+        int a[N];
+        sort(a+1,a+1+n,[](int x,int y){return x>y;});
+
+
+    memset初始化函数
+        包含于<cstring>头文件
+        一般用于大的数组或结构体进行清零初始化(如果是别的初值,用for即可(本注释来源于评论))
+        特点：速度快，对内存直接操作
+        
+        memset(name , 0 , sizeof(name));
+
+
+
+    Pair数对
+        pair将一对值（可以有不同的数据类型）和为一个值
+        标准头文件 #include<utility>
+        定义方法：pair<数据类型 , 数据类型> 数对名;//可以在数对名后面加[]定义数组  或者加（data1 ， data2）来定义一个初值
+        调用方法：
+            数对名.first = 数据 ; 数对名.second = 数据;
+            make_pair(数据，数据);
+        代码示例：
+            #include<iostream>
+            #include<string>
+            #include<utility>
+            using namespace std;
+            pair<string,int> getClass(int id){
+                return make_pair("DOTCPP!",id);
+            }
+            int main(int argc,char **argv){
+                pair<string,int> a;
+                a=getClass(10);
+                cout<<a.first<<" "<<a.second<<endl;
+                return 0;
+            }
+
+
+        
+
+如果在读写时间上有要求，用scanf()，和printf()相对较好
+
+
+
+    
+暴力递归——>傻缓存——>动态规划
+        暴力递归是自然算法，后续依照此算法且无关题意的延展开，进行空间换时间的优化，然后再进行空间优化
+        
+        二：首先确定循环中，一直变化的变量的值范围
+        依据值范围开辟对应大小的内存空间
+        根据base case确定dp表的部分值
+        根据递归代码，找出依赖关系，写出构造dp表的代码
+
+范围尝试模型：
+    考虑开头和结尾共同结合的可能性
+样本对应模型：
+    考虑样本的结尾如何
+
+        
+检查题所需操作
+
+编写时：
+    关于变量的细节：
+        看变量声明的数据类型是否符合
+        表示数据范围是否符合
+        查看加法、乘法运算操作是否会超数据类型表示是范围
+
+测试时：
+    数据测试：
+        思考在本题中哪些是边界数据，比如有log()的话那1就是边界数据
+        思考出边界数据后应该测试

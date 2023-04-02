@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <!-- 一个下拉框，列表选项分别为“请选择项目”、“第1项”、“第2项”、“第3项”，其对应的值分别为Please select items (默认为已选状态)、First Choice、Second Choice、Third Choice；， -->
+        <select name="select" id="select">
+            <option value="Please select items">请选择项目</option>
+            <option value="First Choice">第1项</option>
+            <option value="Second Choice">第2项</option>
+            <option value="Third Choice">第3项</option>
+        </select>
+        <!-- 一个文本框，用来显示选择的列表选项项目，例如在下拉框中选择“第1项”，文本框中即显示First Choice；一组单选按钮，当选中【大写】单选按钮时，文本框中的字母都会变成大写，当选中【小写】单选按钮时，文本框中的字母都会变成小写 -->
+        <input type="text" id="text" value=""> <br>
+        <font size="4">大小写转换：</font>
+        <input type="radio" name="radio" id="upper" value="upper">大写
+        <input type="radio" name="radio" id="lower" value="lower">小写
+        <script>
+        // 为下拉框添加事件，当选择某个选项时，文本框中显示该选项的值
+        var select = document.getElementById('select');
+        var text = document.getElementById('text');
+        select.onchange = function(){
+            text.value = select.value;
+        }
+        // 为单选按钮添加事件，当选中【大写】单选按钮时，文本框中的字母都会变成大写，当选中【小写】单选按钮时，文本框中的字母都会变成小写
+        var upper = document.getElementById('upper');
+        var lower = document.getElementById('lower');
+        upper.onclick = function(){
+            text.value = text.value.toUpperCase();
+        }
+        lower.onclick = function(){
+            text.value = text.value.toLowerCase();
+        }
+    </script>
+    </body>
+</html>
