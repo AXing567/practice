@@ -1,0 +1,2 @@
+# CodeAll
+A prictace project.
