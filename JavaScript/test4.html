@@ -1,29 +1,16 @@
 <!DOCTYPE html>
 <html>
 
-<head>
-    <meta charset="UTF-8">
-    <title>onload属性示例</title>
-    <script>
-        function printout() {
-            document.write("这是第一次调用");
-            document.write("<br>");
-            document.write("这是用记事本写的js程序");
-            document.write("<br>");
-            document.write("这是第二次调用");
-            document.write("<br>");
-            document.write("这是用记事本写的js程序");
-            document.write("<br>");
-            document.write("这是第三次调用");
-            document.write("<br>");
-            document.write("这是用记事本写的js程序");
-            document.write("<br>");
-        }
+    <head>
+        <meta charset="UTF-8">
+        <title>onload属性示例</title>
+
+    </head>
+
+    <script language="javascript">
+var todays_date=new Date(); var hours=todays_date.getHours(); var str=(hours>12)?"上午好! ":"下午好!"; document.write(hours);    
     </script>
-</head>
 
-<body onload="printout()">
-
-</body>
+    </body>
 
 </html>
