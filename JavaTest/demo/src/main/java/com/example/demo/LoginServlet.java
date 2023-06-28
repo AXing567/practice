@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.connectDB.OperateDB;
+import com.example.connectDB.LoginService;
 import com.google.gson.Gson;
 
 import javax.servlet.ServletException;
@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -17,26 +18,39 @@ import java.util.Map;
 public class LoginServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Map<String, String> map = new HashMap<>();
-        OperateDB operateDB = new OperateDB();
+
+//        设置编码格式
         request.setCharacterEncoding("utf-8");
         response.setContentType("text/html;charset=utf-8");
-        String uname;
-        String upwd;
 
-        uname = "1";
-        upwd = "123";
-//        upwd = request.getParameter("upwd");
-//        uname = request.getParameter("uname");
-        map.put("checkCode", operateDB.check(uname, upwd).checkCode ? "1" : "0");
-        map.put("checkMsg", operateDB.check(uname, upwd).msg);
-        map.put("admin", "admin");
-        map.put("user", "user");
+//        获取前端传来的数据
+        StringBuilder requestBody = new StringBuilder();
+        BufferedReader reader = request.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            requestBody.append(line);
+        }
+        reader.close();
+
+        LoginService loginService = new LoginService();
+        Map<String, Object> map = new HashMap<>();
+        Gson gson = new Gson();
+
+//        当没有输入用户名和密码时返回的结果
+        if (requestBody.toString().equals("")) {
+            map.put("checkCode", loginService.LoginResultFalse());
+            response.getWriter().write(gson.toJson(map));
+            return;
+        }
+
+//        检测是否登录成功
+        map = gson.fromJson(requestBody.toString(), Map.class);
+        String uname = map.get("uname").toString();
+        String upwd = map.get("upwd").toString();
+        map.put("checkCode", loginService.login(uname, upwd));
 
 //        将map转换为json并输出到前端
-        Gson gson = new Gson();
-        String userMap = gson.toJson(map);
-        response.getWriter().write(userMap);
+        response.getWriter().write(gson.toJson(map));
 
     }
 
