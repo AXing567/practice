@@ -1,45 +1,78 @@
 package com.example.connectDB;
 
+import java.sql.*;
+
 public class OperateDB {
-    public class CheckCodeMsg {
-        public boolean checkCode;
-        public String msg;
-        public Boolean power;
-    }
+    private static Connection conn;
+    private static PreparedStatement pstmt;
+    private static ResultSet rs;
 
-    public CheckCodeMsg check(String userName, String password) {
-//        实例化链接数据库的对象，用其内部的方法进行数据库的操作
-        ConnectDB conn = new ConnectDB();
-//        实例化一个返回值对象
-        CheckCodeMsg checkCodeMsg = new CheckCodeMsg();
+    /**
+     * @param : 空
+     * @return void
+     * @author Axing
+     * @description 链接数据库
+     * @date 2023/6/28 16:30
+     */
+    public void connect(){
         try {
-            // 链接数据库
-            conn.openCon();
-            // 判断是否存在该用户
-            conn.setRs(conn.getStmt().executeQuery("select '" + userName + "' from user"));
-            if (conn.getRs() != null) {
-                conn.setRs(conn.getStmt().executeQuery("SELECT * FROM USER WHERE `userName` = '" + userName + "' AND `password` = '" + password + "'"));
-                if (conn.getRs() != null) {
-                    checkCodeMsg.checkCode = true;
-                    checkCodeMsg.msg = "登录成功";
-                } else {
-                    checkCodeMsg.checkCode = false;
-                    checkCodeMsg.msg = "用户名或密码错误";
-                }
-            } else {
-                checkCodeMsg.checkCode = false;
-                checkCodeMsg.msg = "用户名或密码错误";
-            }
-            // 关闭数据库
-            conn.closeCon();
-            return checkCodeMsg;
-
+            Class.forName("com.mysql.jdbc.Driver");
+            String url="jdbc:mysql://localhost:3306/school";
+            conn = DriverManager.getConnection(url,"root","123");
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return checkCodeMsg;
     }
 
+    public static ResultSet selectToken(String token){
+        try {
+            pstmt = conn.prepareStatement("select * from user where token = ?");
+            pstmt.setString(1,token);
+            return pstmt.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("查找token异常（当有此报错的时候，selectToken()的返回值为空）");
+        }
+        return null;
+    }
 
+    /**
+     * @param userName: 用户名
+     * @param password: 密码
+     * @return ResultSet
+     * @author Axing
+     * @description 查询用户名和密码后返回一个对象如登录信息，权限等。参考com.example.LoginService.LoginResult类
+     * @date  2023/6/28 16:30
+     */
+    public ResultSet selectUser(String userName, String password){
+        try {
+            pstmt = conn.prepareStatement("SELECT * FROM user WHERE userName = ? AND password = ?");
+            pstmt.setString(1, userName);
+            pstmt.setString(2, password);
+            return pstmt.executeQuery();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rs;
+    }
+
+//    public String
+
+    /**
+     * @param :
+     * @return void
+     * @author Axing
+     * @description 关闭数据库
+     * @date  2023/6/28  16:36
+     */
+    public void closeDB(){
+        try {
+            if(rs!=null) rs.close();
+            if(pstmt!=null) pstmt.close();
+            if(conn!=null) conn.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
 }

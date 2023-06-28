@@ -1,32 +1,30 @@
-package com.example.connectDB;
+package com.example.LoginService;
 
 import java.sql.*;
 
-public class LoginService {
-//    根据用户名和密码查询用户信息
-    public LoginResult login(String userName, String password) {
+import com.example.connectDB.OperateDB;
+
+public class Login {
+    //    根据用户名和密码查询用户信息
+    /**
+     * @param userName: 用户名
+     * @param password: 密码
+     * @param operateDB: 链接数据库的类
+     * @return LoginResult
+     * @author Axing
+     * @description 根据数据库中查询的用户名和密码判断返回怎样的登录信息
+     * @date  2023/6/28 17:29
+     */
+
+    public LoginResult login(String userName, String password ,OperateDB operateDB) {
         LoginResult result = new LoginResult();
 
-        // 连接数据库
-        Connection conn = null;
-        try {
-            Class.forName("com.mysql.jdbc.Driver");
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3306/school", "root", "123");
-        } catch (SQLException | ClassNotFoundException e) {
-            result.setSuccess(false);
-            result.setMessage("数据库连接失败");
-            result.setPermission(0);
-            return result;
-        }
 
         // 查询用户信息
         PreparedStatement ps = null;
         ResultSet rs = null;
         try {
-            ps = conn.prepareStatement("SELECT * FROM user WHERE userName = ? AND password = ?");
-            ps.setString(1, userName);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
+            rs = operateDB.selectUser(userName, password);
             if (rs.next()) {
                 result.setSuccess(true);
                 result.setMessage("登录成功");
@@ -42,17 +40,12 @@ public class LoginService {
             result.setPermission(0);
         } finally {
             // 关闭数据库连接
-            try {
-                if (rs != null) rs.close();
-                if (ps != null) ps.close();
-                if (conn != null) conn.close();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
+            operateDB.closeDB();
         }
         return result;
     }
-//    用户名或密码为空时返回的结果
+
+    //    用户名或密码为空时返回的结果
     public LoginResult LoginResultFalse() {
         LoginResult result = new LoginResult();
         result.setSuccess(false);
@@ -66,29 +59,21 @@ class LoginResult {
     private boolean success; // 是否成功
     private String message; // 登录信息
     private int permission; // 用户权限
+
     public String toString() {
         return "LoginResult [success=" + success + ", message=" + message + ", permission=" + permission + "]";
     }
 
-    public boolean isSuccess() {
-        return success;
-    }
 
     public void setSuccess(boolean success) {
         this.success = success;
     }
 
-    public String getMessage() {
-        return message;
-    }
 
     public void setMessage(String message) {
         this.message = message;
     }
 
-    public int getPermission() {
-        return permission;
-    }
 
     public void setPermission(int permission) {
         this.permission = permission;
