@@ -1,6 +1,6 @@
-package com.example.loginService;
+package com.example.LoginService;
 
-import com.example.operateDB.OperateDB;
+import com.example.OperateDB.OperateDB;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,22 +26,4 @@ public class TokenUtil {
         }
         return token;
     }
-
-    /**
-     * @param token:用户登录令牌。首次注册会自动为其生成一个token
-     * @param userName: 用户名
-     * @return boolean
-     * @author Axing
-     * @description 根据token和username，验证token是否正确
-     * @date 2023/6/28 17:48
-     */
-    public static boolean verify(String token , String userName) {
-        return OperateDB.selectToken(token , userName) != null;
-    }
-
-//    public static User gentUser(String token){
-//        return tokenMap.get(token);
-//    }
-
-
 }
